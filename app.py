@@ -72,7 +72,8 @@ if uploaded_file:
         cluster_labels = kmeans.fit_predict(embeddings.cpu().numpy())
 
         perplexity = min(30, len(abstracts) - 1)
-        tsne = TSNE(n_components=2, perplexity=perplexity, n_iter=1000, random_state=42)
+        tsne = TSNE(n_components=2, perplexity=perplexity, max_iter=1000, random_state=42)
+
 
         reduced = tsne.fit_transform(embeddings.detach().cpu().numpy())
 
