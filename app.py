@@ -72,7 +72,8 @@ if uploaded_file:
         cluster_labels = kmeans.fit_predict(embeddings.cpu().numpy())
 
         tsne = TSNE(n_components=2, perplexity=30, n_iter=1000, random_state=42)
-        reduced = tsne.fit_transform(embeddings.cpu().numpy())
+        reduced = tsne.fit_transform(embeddings.detach().cpu().numpy())
+
 
         cluster_df = pd.DataFrame(reduced, columns=["x", "y"])
         cluster_df['Cluster'] = cluster_labels
